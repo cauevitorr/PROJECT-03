@@ -2,9 +2,12 @@ import express from 'express'
 import cors from 'cors'
 import conn from './src/config/conn.js'
 import router from './src/router/userRouter.js'
+import dotenv from "dotenv"
 
 const port = 3333
 const app = express()
+
+dotenv.config()
 
 app.use(cors())
 app.use(express.urlencoded({extended:true}))
