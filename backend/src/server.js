@@ -1,8 +1,9 @@
 import express from 'express'
 import cors from 'cors'
-import conn from './src/config/conn.js'
-import router from './src/router/userRouter.js'
+import conn from './config/conn.js'
 import dotenv from "dotenv"
+import userRouter from './router/userRouter.js'
+import authRouter from './router/authRouter.js'
 
 const port = 3333
 const app = express()
@@ -13,7 +14,8 @@ app.use(cors())
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 
-app.use('/', router)
+app.use('/', userRouter)
+app.use('/auth', authRouter)
 
 conn.sync().then(()=>{
     app.listen(port, ()=>{

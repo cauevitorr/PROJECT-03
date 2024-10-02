@@ -1,6 +1,7 @@
 import users from "../model/usersModel.js";
 import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken"
+import { response } from "express";
 
 export const createUser = (request, response) => {
 
@@ -44,5 +45,13 @@ export const loginUser = async (request, response) =>{
         response.status(200).json({message: 'Login concluído.', token})
     } catch (error) {
         response.status(500).json(error)
+    }
+}
+
+export const getUserProfile = (request, response)=>{
+    try{
+    response.status(200).json({message: "perfil do usuário", user: request.user})
+    }catch(error){
+        response.status(400).json({message: "Você não tem acesso.", error})
     }
 }
